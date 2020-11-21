@@ -18,6 +18,7 @@
 		<java.version>11</java.version>
 		<spring.boot.mvn.plugin.version>2.4.0</spring.boot.mvn.plugin.version>
 		<flyway.version>7.2.1</flyway.version>
+		<tomcat.version>9.0.31</tomcat.version>
 	</properties>
 
 	<dependencies>
@@ -62,13 +63,25 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>2.3.8</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
 
 	<build>
+		<finalName>pst-task</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -82,11 +95,20 @@
 				<configuration>
 					<user>sa</user>
 					<password>sa</password>
-					<schemas>
-						<schema>testdb</schema>
-					</schemas>
-					<url>jdbc:h2:mem:testdb</url>
+					<url>jdbc:h2:mem:test-db</url>
 					<locations>filesystem:db/migration</locations>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8083/manager/text</url>
+					<server>TomcatServer</server>
+					<path>/pst</path>
+					<username>goose</username>
+					<password>mypassword</password>
 				</configuration>
 			</plugin>
 		</plugins>

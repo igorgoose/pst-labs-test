@@ -35,14 +35,5 @@ public class Job implements Serializable {
     @ToString.Exclude
     private List<Person> employees = new LinkedList<>();
 
-    public void addEmployee(Person employee) {
-        employees.add(employee);
-        employee.getJobs().add(this);
-    }
-
-    public void removeEmployee(Person employee) {
-        employees.remove(employee);
-        employee.getJobs().remove(this);
-    }
 
 }

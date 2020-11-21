@@ -27,11 +27,6 @@ public class Passport implements Serializable {
     private Person person;
 
 
-    public Passport(String number, Person person) {
-        this.number = number;
-        this.person = person;
-    }
-
     public Passport(String number) {
         this.number = number;
     }

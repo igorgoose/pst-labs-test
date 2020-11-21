@@ -16,20 +16,22 @@ public enum CarDTO {
         String getModel();
     }
 
-    private interface Owner {
-        PersonDTO.Response.Short getOwner();
-    }
+
 
     public enum Request {
         ;
 
+        private interface Owner {
+            PersonDTO.Request.IdOnly getOwner();
+        }
         @Data
-        public static class Create implements Id, Model {
+        public static class Create implements Id, Model, Owner {
             private int id;
             private String model;
+            private PersonDTO.Request.IdOnly owner = new PersonDTO.Request.IdOnly();
 
             public Car convert() {
-                return new Car(id, model);
+                return new Car(id, model, owner.convert());
             }
         }
 
@@ -47,6 +49,10 @@ public enum CarDTO {
 
     public enum Response {
         ;
+
+        private interface Owner {
+            PersonDTO.Response.Short getOwner();
+        }
 
         @EqualsAndHashCode(callSuper = true)
         @Data

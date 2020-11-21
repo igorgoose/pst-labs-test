@@ -4,6 +4,7 @@ import by.pst.schepov.test.core.entity.Job;
 import by.pst.schepov.test.core.entity.Person;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.LinkedList;
@@ -78,6 +79,7 @@ public enum PersonDTO {
 
         @EqualsAndHashCode(callSuper = true)
         @Data
+        @NoArgsConstructor
         public static class Short extends RepresentationModel<PersonDTO.Response.Short>
                 implements Id, FirstName, LastName {
             private int id;

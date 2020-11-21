@@ -55,13 +55,4 @@ public class Person implements Serializable {
         this.jobs = jobs;
     }
 
-    public void addJob(Job job){
-        jobs.add(job);
-        job.getEmployees().add(this);
-    }
-
-    public void removeJob(Job job){
-        jobs.remove(job);
-        job.getEmployees().remove(this);
-    }
 }

@@ -27,9 +27,4 @@ public class Car implements Serializable {
     @ToString.Exclude
     private Person owner;
 
-
-    public Car(int id, String model) {
-        this.id = id;
-        this.model = model;
-    }
 }
