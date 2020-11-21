@@ -25,7 +25,6 @@ public enum PersonDTO {
         String getLastName();
     }
 
-
     public enum Request {
         ;
 
@@ -52,7 +51,7 @@ public enum PersonDTO {
         public static class Create implements FirstName, LastName, Passport, Jobs {
             private String firstName;
             private String lastName;
-            private PassportDTO.Request.Create passport;
+            private PassportDTO.Request.Create passport = new PassportDTO.Request.Create();
             private List<JobDTO.Request.IdOnly> jobs = new LinkedList<>();
 
             public Person convert(){

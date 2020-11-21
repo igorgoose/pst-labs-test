@@ -1,10 +1,14 @@
 package by.pst.schepov.test.rest.dto;
 
-import by.pst.schepov.test.core.entity.Car;
 import by.pst.schepov.test.core.entity.Job;
+import by.pst.schepov.test.core.entity.Person;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum JobDTO {
     ;
@@ -24,6 +28,10 @@ public enum JobDTO {
     public enum Request {
         ;
 
+        private interface Employees {
+            List<PersonDTO.Request.IdOnly> getEmployees();
+        }
+
         @Data
         public static class IdOnly implements Id {
             private int id;
@@ -36,13 +44,16 @@ public enum JobDTO {
         }
 
         @Data
-        public static class Create implements Id, Title, CompanyName {
+        public static class Create implements Id, Title, CompanyName, Employees {
             private int id;
             private String title;
             private String companyName;
+            List<PersonDTO.Request.IdOnly> employees = new LinkedList<>();
 
             public Job convert(){
-                return new Job(id, title, companyName);
+                List<Person> people = employees.stream().map(PersonDTO.Request.IdOnly::convert)
+                        .collect(Collectors.toList());
+                return new Job(id, title, companyName, people);
             }
         }
 
@@ -50,6 +61,10 @@ public enum JobDTO {
 
     public enum Response {
         ;
+
+        private interface Employees {
+            List<PersonDTO.Response.Short> getEmployees();
+        }
 
         @EqualsAndHashCode(callSuper = true)
         @Data
@@ -69,15 +84,18 @@ public enum JobDTO {
         @EqualsAndHashCode(callSuper = true)
         @Data
         public static class Full extends RepresentationModel<CarDTO.Response.Full>
-                implements Id, Title, CompanyName {
+                implements Id, Title, CompanyName, Employees {
             private int id;
             private String title;
             private String companyName;
+            private List<PersonDTO.Response.Short> employees;
 
             public Full(Job job) {
                 id = job.getId();
                 title = job.getTitle();
                 companyName = job.getCompanyName();
+                employees = job.getEmployees().stream().map(PersonDTO.Response.Short::new)
+                        .collect(Collectors.toList());
             }
         }
 

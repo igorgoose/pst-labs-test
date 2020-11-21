@@ -96,7 +96,9 @@ public class PersonServiceImpl implements PersonService {
         for (Job job : jobs) {
             Job persistedJob = jobRepository.findById(job.getId()).orElseThrow(() ->
                     new InvalidRequestDataException("Invalid job id(" + job.getId() + ")."));
-            persistedJob.getEmployees().add(persistedPerson);
+            if(!persistedJob.getEmployees().contains(persistedPerson)){
+                persistedJob.getEmployees().add(persistedPerson);
+            }
             persistedPerson.getJobs().add(persistedJob);
         }
     }

@@ -35,7 +35,7 @@ public class Person implements Serializable {
     @ToString.Exclude
     private List<Car> cars = new LinkedList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany
     @JoinTable(
             name = "employees",
             joinColumns = @JoinColumn(name = "person_id"),

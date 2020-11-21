@@ -25,7 +25,8 @@ create table jobs
 (
     id           int primary key auto_increment,
     title        varchar(50),
-    company_name varchar(50)
+    company_name varchar(50),
+    unique (title, company_name)
 );
 
 create table employees
@@ -54,16 +55,26 @@ VALUES ('MP1234566', 'Steven', 'Stevenson');
 insert into people(passport_number, first_name, last_name)
 VALUES ('MP1234565', 'Jack', 'Jackson');
 
-insert into cars(model, owner_id) VALUES ('Volkswagen Polo', 1);
-insert into cars(model, owner_id) VALUES ('Lada Vesta', 1);
-insert into cars(model, owner_id) VALUES ('Bentley Phantom', 3);
+insert into cars(model, owner_id)
+VALUES ('Volkswagen Polo', 1);
+insert into cars(model, owner_id)
+VALUES ('Lada Vesta', 1);
+insert into cars(model, owner_id)
+VALUES ('Bentley Phantom', 3);
 
-insert into jobs(title, company_name) VALUES ('HR', 'PST Labs');
-insert into jobs(title, company_name) VALUES ('Junior Dev', 'PST Labs');
-insert into jobs(title, company_name) VALUES ('Cleaning Manager', 'PST Labs');
+insert into jobs(title, company_name)
+VALUES ('HR', 'PST Labs');
+insert into jobs(title, company_name)
+VALUES ('Junior Dev', 'PST Labs');
+insert into jobs(title, company_name)
+VALUES ('Cleaning Manager', 'PST Labs');
 
-insert into employees(person_id, job_id) VALUES (1, 1);
-insert into employees(person_id, job_id) VALUES (1, 3);
-insert into employees(person_id, job_id) VALUES (2, 2);
-insert into employees(person_id, job_id) VALUES (3, 3);
+insert into employees(person_id, job_id)
+VALUES (1, 1);
+insert into employees(person_id, job_id)
+VALUES (1, 3);
+insert into employees(person_id, job_id)
+VALUES (2, 2);
+insert into employees(person_id, job_id)
+VALUES (3, 3);
 

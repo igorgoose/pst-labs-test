@@ -16,6 +16,7 @@ import java.util.List;
 public class Job implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             columnDefinition = "INTEGER"
     )
@@ -25,16 +26,14 @@ public class Job implements Serializable {
 
     private String companyName;
 
-    @ManyToMany(mappedBy = "jobs")
+    @ManyToMany
+    @JoinTable(
+            name = "employees",
+            joinColumns = @JoinColumn(name = "job_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id"))
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Person> employees = new LinkedList<>();
-
-    public Job(int id, String title, String companyName) {
-        this.id = id;
-        this.title = title;
-        this.companyName = companyName;
-    }
 
     public void addEmployee(Person employee) {
         employees.add(employee);
