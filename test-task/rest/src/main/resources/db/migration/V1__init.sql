@@ -32,7 +32,7 @@ create table employees
 (
     person_id int not null,
     job_id    int not null,
-    primary key (job_id, person_id),
+    primary key (person_id, job_id),
     foreign key (person_id) references people (id)
         on delete cascade,
     foreign key (job_id) references jobs (id)

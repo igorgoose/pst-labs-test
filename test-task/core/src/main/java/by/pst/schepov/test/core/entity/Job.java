@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -27,5 +28,22 @@ public class Job implements Serializable {
     @ManyToMany(mappedBy = "jobs")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<Person> employees;
+    private List<Person> employees = new LinkedList<>();
+
+    public Job(int id, String title, String companyName) {
+        this.id = id;
+        this.title = title;
+        this.companyName = companyName;
+    }
+
+    public void addEmployee(Person employee) {
+        employees.add(employee);
+        employee.getJobs().add(this);
+    }
+
+    public void removeEmployee(Person employee) {
+        employees.remove(employee);
+        employee.getJobs().remove(this);
+    }
+
 }

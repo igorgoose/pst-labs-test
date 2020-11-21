@@ -21,7 +21,7 @@ public class Passport implements Serializable {
 
     private Date dateOfIssue;
 
-    @OneToOne(mappedBy = "passport", cascade = CascadeType.MERGE, optional = false)
+    @OneToOne(mappedBy = "passport")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Person person;
@@ -30,5 +30,9 @@ public class Passport implements Serializable {
     public Passport(String number, Person person) {
         this.number = number;
         this.person = person;
+    }
+
+    public Passport(String number) {
+        this.number = number;
     }
 }

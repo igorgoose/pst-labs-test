@@ -28,4 +28,8 @@ public class Car implements Serializable {
     private Person owner;
 
 
+    public Car(int id, String model) {
+        this.id = id;
+        this.model = model;
+    }
 }

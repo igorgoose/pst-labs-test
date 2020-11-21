@@ -23,16 +23,19 @@ public enum PassportDTO {
     }
 
     private interface PersonRequest {
-        PersonDTO.Request.CreatePassport getPerson();
+        PersonDTO.Request.IdOnly getPerson();
     }
 
     public enum Request {
         ;
 
         @Data
-        public static class Create implements Number, PersonRequest {
-            String number;
-            PersonDTO.Request.CreatePassport person;
+        public static class Create implements Number {
+            private String number;
+
+            public Passport convert() {
+               return new Passport(number);
+            }
         }
 
     }
